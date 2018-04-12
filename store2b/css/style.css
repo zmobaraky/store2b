@@ -1,0 +1,46 @@
+body{ padding: 0px;margin: 0px;}
+#table_container{margin: 10px;}
+table{border: 1px solid gray;;}
+th,td{border: 1px solid gray;padding: 5px}
+th{background-color: #efeeee;}
+input{margin-left: 5px; width: 80px; margin-top: 3px;}
+select{background-color: white}
+.sortorder:after {
+    content: '\25b2';   // BLACK UP-POINTING TRIANGLE
+}
+.sortorder{margin-left: 5px}
+.sortorder.reverse:after {
+    content: '\25bc';   // BLACK DOWN-POINTING TRIANGLE
+}
+label{display: block;cursor: pointer;}
+
+
+.pagination li {cursor: pointer;border-radius: 5px; list-style: none;background-color: #9d9d9d;display: inline; text-align: center; padding: 5px 10px;margin-left: 5px;}
+
+.pagination .active {background-color: #dad6d6;cursor: auto;}
+
+
+.tooltip {
+    position: relative;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #444444;
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 5px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -100px;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}

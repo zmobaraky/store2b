@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>store2b_test</title>
+    <script src="js/angular.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/ajax.js"></script>
+</head>
+<body>
+
+<div id="table_container" ng-app="myApp" ng-controller="customersCtrl">
+    <div>{{error}}</div>
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <th>No.</th>
+            <th>
+                <label class="tooltip" ng-click="OrderByName('title')">Title
+                    <span class="sortorder" ng-show="on === 'title'" ng-class="{reverse: order_reverse}"></span>
+                    <span class="tooltiptext">Tooltip for Title</span>
+                </label>
+                <input type="text" ng-model="ft" style="width: 280px;">
+            </th>
+            <th>
+                <label class="tooltip" ng-click="OrderByName('reach')">Reach
+                    <span class="sortorder" ng-show="on === 'reach'" ng-class="{reverse: order_reverse}"></span>
+                    <span class="tooltiptext">Tooltip for Reach</span>
+                </label>
+                <input type="text" ng-model="fr">
+            </th>
+            <th>
+                <label class="tooltip" ng-click="OrderByName('capture_rate')">Capture Rate
+                    <span class="sortorder" ng-show="on === 'capture_rate'" ng-class="{reverse: order_reverse}"></span>
+                    <span class="tooltiptext">Tooltip for Capture Rate</span>
+                </label>
+                <input type="text" ng-model="fcr" style="width: 140px;">
+            </th>
+            <th>
+                <label class="tooltip" hint="fffff" ng-click="OrderByName('views')">Views
+                    <span class="sortorder" ng-show="on === 'views'" ng-class="{reverse: order_reverse}"></span>
+                    <span class="tooltiptext">Tooltip for Views</span>
+                </label>
+                <input type="text" ng-model="fv">
+            </th>
+            <th>
+                <label class="tooltip" ng-click="OrderByName('interaction_rate')">Interaction Rate
+                    <span class="sortorder" ng-show="on === 'interaction_rate'" ng-class="{reverse: order_reverse}"></span>
+                    <span class="tooltiptext">Tooltip for Interaction Rate</span>
+                </label>
+                <input type="text" ng-model="fir" style="width: 140px;">
+            </th>
+            <th>
+                <label class="tooltip" ng-click="OrderByName('interactions')">Interactions
+                    <span class="sortorder" ng-show="on === 'interactions'" ng-class="{reverse: order_reverse}"></span>
+                    <span class="tooltiptext">Tooltip for Interactions</span>
+                </label>
+                <input type="text" ng-model="fi">
+            </th>
+            <th>
+                <label class="tooltip" ng-click="OrderByName('goal')">Goal
+                    <span class="sortorder" ng-show="on === 'goal'" ng-class="{reverse: order_reverse}"></span>
+                    <span class="tooltiptext">Tooltip for Goal</span>
+                </label>
+                <input type="text" ng-model="fg">
+            </th>
+        </tr>
+
+        <tr ng-repeat="x in KPIs | filter:MakeFilter() | orderBy:on:order_reverse | offset: (pagination.currentPage-1)*pagination.itemPerPage | limitTo: pagination.itemPerPage">
+            <td>{{ (pagination.currentPage-1)*pagination.itemPerPage + $index + 1 }}</td>
+            <td>{{ x.title }}</td>
+            <td>{{ x.reach }}</td>
+            <td>{{ x.capture_rate }}</td>
+            <td>{{ x.views }}</td>
+            <td>{{ x.interaction_rate }}</td>
+            <td>{{ x.interactions }}</td>
+            <td ng-if="!x.goal || x.goal == ''"><select ng-model="selectedName" ng-options="x for x in Goals"></select></td>
+            <td ng-if="x.goal && x.goal != ''">{{ x.goal }}</td>
+        </tr>
+    </table>
+
+    <ul class="pagination" rel="{{filteredKPIs=(AllKPIs | filter:MakeFilter()).length}}">
+        <li ng-click="pagination.prevPage()">&laquo;</li>
+        <li ng-click="pagination.setPageId(n)" ng-repeat="n in pagination.pages | limitTo: pagination.endPage" ng-class="{active: n == pagination.currentPage}">
+            {{n}}
+        </li>
+        <li ng-click="pagination.nextPage()">&raquo;</li>
+    </ul>
+
+</div>
+
+
+</body>
+</html>
+
+
+
